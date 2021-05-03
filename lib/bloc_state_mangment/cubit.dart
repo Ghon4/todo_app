@@ -98,11 +98,19 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  upadateDBState({@required String status, @required int id}) {
+  updateDBState({@required String status, @required int id}) {
     _database.rawUpdate('UPDATE tasks SET status = ? WHERE id = ?',
         ['$status', id]).then((value) {
       getDataFromDatabase(_database);
       emit(AppUpdateDBState());
     });
+  }
+
+  deleteDBState({@required int id}) {
+    _database
+      ..rawDelete('DELETE FROM tasks WHERE id = ?', [id]).then((value) {
+        getDataFromDatabase(_database);
+        emit(AppDeleteDBState());
+      });
   }
 }

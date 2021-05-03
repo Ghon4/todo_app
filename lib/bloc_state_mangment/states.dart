@@ -10,6 +10,8 @@ class AppInsertDBState extends AppInitialState {}
 
 class AppUpdateDBState extends AppInitialState {}
 
+class AppDeleteDBState extends AppInitialState {}
+
 class AppLoadingState extends AppInitialState {}
 
 class AppOpenAndReadDBState extends AppInitialState {}
