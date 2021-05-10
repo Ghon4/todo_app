@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/bloc_state_mangment/cubit.dart';
-import 'package:todo_app/bloc_state_mangment/states.dart';
 
 class TodoListItem extends StatelessWidget {
   Map model;
@@ -47,22 +45,5 @@ class TodoListItem extends StatelessWidget {
         AppCubit.get(context).deleteDBState(id: model['id']);
       },
     );
-
-    // return BlocConsumer<AppCubit, AppStates>(
-    //   listener: (context, state) {},
-    //   builder: (context, state) {
-    //     return ListTile(
-    //       leading: CircleAvatar(
-    //         radius: 50,
-    //         child: Text(
-    //           '${model['time']}',
-    //           style: TextStyle(fontSize: 12),
-    //         ),
-    //       ),
-    //       title: Text('${model['title']}'),
-    //       subtitle: Text('${model['date']}'),
-    //     );
-    //   },
-    // );
   }
 }

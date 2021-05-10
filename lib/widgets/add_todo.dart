@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/bloc_state_mangment/cubit.dart';
 import 'package:todo_app/bloc_state_mangment/states.dart';
-import 'package:todo_app/screens/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc/bloc.dart';
 import 'components.dart';
 import 'package:intl/intl.dart';
 

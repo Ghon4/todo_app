@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/screens/archived_screen.dart';
 import 'package:todo_app/screens/done_screen.dart';
 import 'package:todo_app/screens/new_tasks_screen.dart';
-import 'package:todo_app/utils/constants.dart';
 
 class AppCubit extends Cubit<AppStates> {
   Database _database;
@@ -13,9 +12,13 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
-  List<Map> newtasks = [];
-  List<Map> donetasks = [];
-  List<Map> archivetasks = [];
+  List<Map> newTasks = [];
+  List<Map> doneTasks = [];
+  List<Map> archiveTasks = [];
+
+  // var titlecontroller = TextEditingController();
+  // var tasktimecontroller = TextEditingController();
+  // var taskdatecontroller = TextEditingController();
 
   List screens = [
     NewTaskScreen(),
@@ -24,16 +27,27 @@ class AppCubit extends Cubit<AppStates> {
   ];
   List titles = [
     'New Tasks',
-    'Done',
-    'Archived',
+    'Done Tasks',
+    'Archived Tasks',
   ];
+
+  void clearTextFields(
+    TextEditingController titlecontroller,
+    TextEditingController tasktimecontroller,
+    TextEditingController taskdatecontroller,
+  ) {
+    titlecontroller.text = '';
+    tasktimecontroller.text = '';
+    taskdatecontroller.text = '';
+    emit(AppClearTextFields());
+  }
 
   void changeScreens(int index) {
     currentIndex = index;
     emit(AppChangeNavBottomState());
   }
 
-  Future<void> createDatabase() {
+  Future<void> createDataBase() {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final stringType = 'TEXT NOT NULL';
 
@@ -62,18 +76,18 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   getDataFromDatabase(_database) {
-    newtasks = [];
-    donetasks = [];
-    archivetasks = [];
+    newTasks = [];
+    doneTasks = [];
+    archiveTasks = [];
     emit(AppLoadingState());
     _database.rawQuery('SELECT * FROM tasks').then((value) {
       value.forEach((element) {
         if (element['status'] == 'active')
-          newtasks.add(element);
+          newTasks.add(element);
         else if (element['status'] == 'done')
-          donetasks.add(element);
+          doneTasks.add(element);
         else
-          archivetasks.add(element);
+          archiveTasks.add(element);
         print(element['status']);
       });
       emit(AppOpenAndReadDBState());

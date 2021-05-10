@@ -7,14 +7,14 @@ import 'package:todo_app/bloc_state_mangment/states.dart';
 import 'package:todo_app/widgets/components.dart';
 
 class HomeScreen extends StatelessWidget {
-  var formkey = GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   var titlecontroller = TextEditingController();
   var tasktimecontroller = TextEditingController();
   var taskdatecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AppCubit()..createDatabase(),
+      create: (BuildContext context) => AppCubit()..createDataBase(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (BuildContext context, AppStates state) {},
         builder: (BuildContext context, AppStates state) {
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                     builder: (context) {
                       return AlertDialog(
                         content: Form(
-                          key: formkey,
+                          key: formKey,
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -114,15 +114,20 @@ class HomeScreen extends StatelessWidget {
                                             MaterialStateProperty.all(
                                                 Colors.black)),
                                     onPressed: () => {
-                                      if (formkey.currentState.validate())
+                                      if (formKey.currentState.validate())
                                         {
                                           cubit.insertDatabase(
                                             titlecontroller.text,
                                             taskdatecontroller.text,
                                             tasktimecontroller.text,
                                           ),
+                                          cubit.clearTextFields(
+                                              titlecontroller,
+                                              tasktimecontroller,
+                                              taskdatecontroller),
                                           Navigator.pop(context),
-                                          print('title is $titlecontroller')
+                                          print(
+                                              'title is ${titlecontroller.text}')
                                         }
                                       else
                                         {}
@@ -150,6 +155,7 @@ class HomeScreen extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     )),
             bottomNavigationBar: BottomNavigationBar(
+              currentIndex: cubit.currentIndex,
               backgroundColor: Theme.of(context).primaryColor,
               selectedItemColor: Colors.white,
               unselectedItemColor: Colors.white.withOpacity(0.7),

@@ -15,3 +15,5 @@ class AppDeleteDBState extends AppInitialState {}
 class AppLoadingState extends AppInitialState {}
 
 class AppOpenAndReadDBState extends AppInitialState {}
+
+class AppClearTextFields extends AppInitialState {}
