@@ -1,16 +1,17 @@
-# todo_app
+# TODO App
 
-A new Flutter application.
+## Quick start
+It's an app to help you plan, organize, and manage your daily tasks
 
-## Getting Started
+### Tools Required
+- Flutter
+- SQFlite
+- BLOC
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Copyright and license
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Code and documentation copyright 2011-2018 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
+
+Enjoy :metal:
